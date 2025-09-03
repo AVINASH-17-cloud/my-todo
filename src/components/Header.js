@@ -2,14 +2,21 @@ import React from "react";
 
 function Header({ darkMode, setDarkMode }) {
   return (
-    <div className="header">
-      <h1 className="title">My To-Do List</h1>
-      <button
-        className="dark-mode-toggle"
-        onClick={() => setDarkMode(!darkMode)}
-      >
-        {darkMode ? "☀ Light" : "🌙 Dark"}
-      </button>
+    <div className="todo-header">
+      <h2>My To-Do List</h2>
+      <div className="theme-switch-wrapper">
+        <label className="theme-switch">
+          <input
+            type="checkbox"
+            checked={darkMode}
+            onChange={() => setDarkMode(!darkMode)}
+          />
+          <span className="slider"></span>
+        </label>
+        <span className="theme-label">
+          {darkMode ? "Dark Mode" : "Light Mode"}
+        </span>
+      </div>
     </div>
   );
 }
