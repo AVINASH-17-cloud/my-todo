@@ -13,6 +13,7 @@ function TaskInput({ addTask }) {
   return (
     <div className="input-section">
       <input
+        id="task-input"
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}

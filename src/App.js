@@ -18,8 +18,14 @@ function App() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+  // Sync darkMode to localStorage AND to document.body class
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
+    if (darkMode) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
   }, [darkMode]);
 
   const addTask = (text) => {
@@ -38,10 +44,8 @@ function App() {
   };
 
   const editTask = (id) => {
-    const newText = prompt(
-      "Edit your task:",
-      tasks.find((t) => t.id === id).text
-    );
+    const task = tasks.find((t) => t.id === id);
+    const newText = prompt("Edit your task:", task ? task.text : "");
     if (newText && newText.trim() !== "") {
       setTasks(
         tasks.map((t) => (t.id === id ? { ...t, text: newText.trim() } : t))
@@ -54,7 +58,7 @@ function App() {
   };
 
   return (
-    <div className={`main-container ${darkMode ? "dark-mode" : ""}`}>
+    <div className="main-container">
       <div className="image-section">
         <div className="circle-image"></div>
       </div>
